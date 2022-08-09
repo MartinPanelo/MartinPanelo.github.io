@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="estilos.css" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <div class="barra-superior">
+            <a href=""> <img src="./assets/banner/Logo-Alura.png" /></a>
+            <a href=""> <img src="./assets/banner/Logo Oracle.png" /></a>
+        </div>
+    </header>
+    <article>
+
+        <div class="posicion">
+            <div>
+                <div>
+                    <p class="centrar-textarea">
+                        <textarea name="" id="textarea" rows="" cols="" placeholder="Ingrese el texto aqui!"
+                            oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea>
+                    </p>
+                </div>
+                <div class="advertencia">
+                    <img src="./assets/Advertencia.png" />
+                    <p>Solo letras minisculas y sin acentos</p>
+                </div>
+                <div class="centrar-boton">
+                    <button id="encriptar" class="boton-estilo-1">Encriptar</button>
+                    <button id="desencriptar" class="boton-estilo-2">Desencriptar</button>
+                </div>
+            </div>
+            <div class="cartelito">
+                <p class="mensaje-1" id="resul">Ningun mensaje fue encontrado</p>
+                <p class="mensaje-2" id="mensaje">Ingresa el texto que desees encriptar o desencriptar</p>
+                <img class="imagen" id="imagen" src="./assets/Muñeco.png">
+                <button class="boton-estilo-2" onclick="copiaralportapapeles()" id="copiar">copiar</button>
+            </div>
+        </div>
+    </article>
+</body>
+
+
+
+<script>
+    let entrada = document.getElementById("textarea");
+    let button1 = document.getElementById("encriptar");
+    let button2 = document.getElementById("desencriptar");
+
+    document.getElementById("copiar").style.display = 'none';
+
+    let texto;
+    let textoEncriptado;
+
+    function validaciontexto() {
+        let cartel = document.getElementById("mensaje").innerHTML;
+        let resul = document.getElementById("resul").innerHTML;
+        let img = document.getElementById("imagen").innerHTML;
+        texto = textarea.value;
+        validez = true;
+
+        for (let i = 0; i < texto.length; i++) {
+
+
+            if ((texto.charCodeAt(i) < 97 || texto.charCodeAt(i) > 122) && (texto.charCodeAt(i) !== 32)) {
+                cartel = document.getElementById("mensaje").innerHTML = "revise el texto ingresado, solo letras minusculas y sin acentos";
+                resul = document.getElementById("resul").innerHTML = "Error!"
+                validez = false;
+                break;
+            }
+            
+        }
+
+        if (texto.length == 0) {
+
+            cartel = document.getElementById("mensaje").innerHTML = "No a ingresado ningun texto";
+            resul = document.getElementById("resul").innerHTML = "Ningun mensaje fue encontrado"
+            validez = false;
+        }
+        if (validez) {
+            cartel = document.getElementById("mensaje").style.display = 'none';
+            img = document.getElementById("imagen").style.display = 'none';
+
+        } else {
+            cartel = document.getElementById("mensaje").style.display = 'block';
+            document.getElementById("copiar").style.display = 'none';
+        }
+
+        return validez;
+    }
+
+
+
+    function encriptador() {
+
+        texto = textarea.value;
+
+        if (validaciontexto()) {
+            textoEncriptado = texto.replace(/e/g, "enter");
+            textoEncriptado = textoEncriptado.replace(/i/g, "imes");
+            textoEncriptado = textoEncriptado.replace(/o/g, "ober");
+            textoEncriptado = textoEncriptado.replace(/a/g, "ai");
+            textoEncriptado = textoEncriptado.replace(/u/g, "ufat");
+            mostrar(textoEncriptado);
+        }
+
+
+
+
+
+
+    }
+
+
+
+    function desencriptador() {
+        texto = textarea.value;
+
+        if (validaciontexto()) {
+            textoDesencriptado = texto.replace(/enter/g, "e");
+            textoDesencriptado = textoDesencriptado.replace(/imes/g, "i");
+            textoDesencriptado = textoDesencriptado.replace(/ai/g, "a");
+            textoDesencriptado = textoDesencriptado.replace(/ober/g, "o");
+            textoDesencriptado = textoDesencriptado.replace(/ufat/g, "u");
+            mostrar(textoDesencriptado);
+        }
+    }
+
+
+
+
+
+
+
+    function mostrar(texto) {
+        document.getElementById("copiar").style.display = 'block';
+        let cartel = document.getElementById("resul").innerHTML = texto;
+
+    }
+
+
+    function copiaralportapapeles() {
+
+
+        const type = "text/plain";
+        const blob = new Blob([textoEncriptado], { type });
+        const data = [new ClipboardItem({ [type]: blob })];
+        navigator.clipboard.write(data);
+        document.getElementById("mensaje").style.display = 'block';
+        let cartel = document.getElementById("mensaje").innerHTML
+            = "Se a copiado el mensaje al portapapeles";
+
+    }
+
+
+
+
+
+
+
+    button1.onclick = encriptador;
+
+    button2.onclick = desencriptador;
+
+
+
+
+
+
+</script>
+
+</html>
