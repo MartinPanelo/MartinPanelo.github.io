@@ -39,7 +39,7 @@
                 <p class="mensaje-1" id="resul">Ningun mensaje fue encontrado</p>
                 <p class="mensaje-2" id="mensaje">Ingresa el texto que desees encriptar o desencriptar</p>
                 <img class="imagen" id="imagen" src="./assets/Muñeco.png">
-                <button class="boton-estilo-2" onclick="copiaralportapapeles()" id="copiar">copiar</button>
+                <button class="boton-estilo-3" onclick="copiaralportapapeles()" id="copiar">copiar</button>
             </div>
         </div>
     </article>
@@ -83,7 +83,7 @@
             validez = false;
         }
         if (validez) {
-            cartel = document.getElementById("mensaje").style.display = 'none';
+            cartel = document.getElementById("mensaje").style.display = 'visibility';
             img = document.getElementById("imagen").style.display = 'none';
 
         } else {
